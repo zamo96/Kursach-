@@ -1,0 +1,78 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit2.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm2 *Form2;
+
+struct Day
+{
+    float TempMorning; // Температура утром
+    float TempDay;     // Температура днем
+    float TempEvening; // Температура вечером
+    float TempNight;   // Температура ночью
+
+    float VlagMorning; // Влажность утром
+    float VlagDay;     // Влажность днем
+    float VlagEvening; // Влажность вечером
+    float VlagNight;   // Влажность ночью
+
+    float BarMorning;  // Давление утром
+    float BarDay;      // Давление днем
+    float BarEvening;  // Давление вечером
+    float BarNight;    // Давление ночью
+
+    char Time [50]; // Дата
+
+    char City [50]; // Город
+};
+
+extern struct Day* DataOfWeather;
+extern int DataOfWeatherCount; // Количество элементов в массиве
+
+
+//---------------------------------------------------------------------------
+__fastcall TForm2::TForm2(TComponent* Owner)
+        : TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm2::Button1Click(TObject *Sender)
+{
+     DataOfWeatherCount++;
+
+     DataOfWeather [DataOfWeatherCount].TempMorning = StrToFloat (Edit1->Text);
+     DataOfWeather [DataOfWeatherCount].TempDay = StrToFloat (Edit2->Text);
+     DataOfWeather [DataOfWeatherCount].TempEvening = StrToFloat (Edit3->Text);
+     DataOfWeather [DataOfWeatherCount].TempNight = StrToFloat (Edit4->Text);
+
+     DataOfWeather [DataOfWeatherCount].VlagMorning = StrToFloat (Edit5->Text);
+     DataOfWeather [DataOfWeatherCount].VlagDay = StrToFloat (Edit6->Text);
+     DataOfWeather [DataOfWeatherCount].VlagEvening = StrToFloat (Edit7->Text);
+     DataOfWeather [DataOfWeatherCount].VlagNight = StrToFloat (Edit8->Text);
+
+     DataOfWeather [DataOfWeatherCount].BarMorning = StrToFloat (Edit9->Text);
+     DataOfWeather [DataOfWeatherCount].BarDay = StrToFloat (Edit10->Text);
+     DataOfWeather [DataOfWeatherCount].BarEvening = StrToFloat (Edit11->Text);
+     DataOfWeather [DataOfWeatherCount].BarNight = StrToFloat (Edit12->Text);
+
+     // Копирование строки
+     strcpy (DataOfWeather [DataOfWeatherCount].Time, Edit13->Text.c_str());
+
+     // Копирование строки
+     strcpy (DataOfWeather [DataOfWeatherCount].City, Edit14->Text.c_str());
+
+
+     Form2->Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm2::Button2Click(TObject *Sender)
+{
+     Form2->Close();
+}
+//---------------------------------------------------------------------------
